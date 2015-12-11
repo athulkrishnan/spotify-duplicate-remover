@@ -1,0 +1,129 @@
+<!doctype html>
+<html class="no-js">
+   <head>
+      <meta charset="utf-8">
+      <title>Spotify Cleanup - Delete duplicate songs from your Spotify library</title>
+      <meta name="description" content="Remove duplicates from your Spotify Playlists">
+      <meta name="og:description" content="Remove duplicates from your Spotify Playlists">
+      <meta name="twitter:description" content="Remove duplicates from your Spotify Playlists">
+      <meta name="og:title" content="Spotify dedup - Deleting duplicated songs from your Spotify library">
+      <meta name="twitter:title" content="Spotify dedup - Deleting duplicated songs from your Spotify library">
+      <meta name="viewport" content="width=device-width">
+      <link rel="shortcut icon" href="/favicon.ico">
+      <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+      <!-- Startup Framework CSS Files -->
+      <link rel="stylesheet" href="styles/bootstrap.css">
+      <link rel="stylesheet" type="text/css" href="styles/flat-ui.css">
+      <link rel="stylesheet" type="text/css" href="styles/icon-font.css">
+      <link rel="stylesheet" type="text/css" href="styles/style.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+      <!-- End Startup Framework CSS Files -->
+
+      <!-- build:css(.tmp) styles/main.css -->
+      <link rel="stylesheet" href="styles/output.css">
+      <link rel="stylesheet" href="styles/main.css">
+      <!-- endbuild -->
+   </head>
+   <body>
+
+
+      <div class="interfacecontainer">
+
+         <header class="header-4 v-center bg-midnight-blue" style="height: 648px;" >
+            <div class="background" style="background-position: 50% -75px;">
+            </div>
+
+            <div>
+               <div class="container" data-bind="visible: !isLoggedIn()">
+                  <div class="row">
+                     <div class="col-sm-6">
+                        <div class="hero-unit">
+                           <h1>Spotify Cleanup</h1>
+                           <p>
+                              Remove duplicate tracks from your playlists.
+                           </p>
+                        </div>
+                        <div class="btns">
+                           <a class="btn btn-large btn-primary" id="login">Login with Spotify</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+
+
+            <div class="container" data-bind="visible: isLoggedIn()">
+               <div class="playlists col-lg-12">
+                  <h3>These are your Spotify playlists.</h3>
+                  <div class="panel panel-default" style="width: 802px; height: 47px;">
+                     <div>
+                     <!-- <div class="panel-body"> -->
+                        <!-- ko if: toProcess() > 0 -->
+                        <center>We are finding duplicates, wait a sec.
+                        Still to process <span data-bind="text: toProcess"></span> playlists.</center>
+                        <!-- /ko -->
+                        <!-- ko if: toProcess() == 0 && duplicates() > 0 -->
+                        <center>Your playlists have been processed!<br/>Duplicates have been listed below. Look for <span class="badge">Duplicate</span> badges.</center>
+                        <!-- /ko -->
+                        <!-- ko if: toProcess() == 0 &&duplicates() == 0 -->
+                        <center>Your playlists have been processed!<br/>Congrats! Your playlists don't have duplicates.</center>
+                        <!-- /ko -->
+                     </div>
+                  </div>
+                  <ul class="fa-ul" data-bind="foreach: playlists" style="padding-right: 100px;">
+                     <li>
+                        <i class="fa fa-music"></i> <span data-bind="text: playlist.name"></span>
+                        <!-- ko if: status() -->
+                        <span class="label label-success" data-bind="text: status()"></span>
+                        <!-- /ko -->
+                        <!-- ko if: duplicates().length -->
+                        <span> - There are duplicates in this playlist </span>
+                        <button class="btn btn-primary btn-xs" data-bind="click: removeDuplicates">Remove duplicates from this playlist</button>
+                        <ul class="duplicates" data-bind="foreach: duplicates()">
+                           <li>
+                              <span class="badge">Duplicate</span> <strong><span data-bind="text: track.name">
+                              </span></strong> by
+                              <strong><span data-bind="text: track.artists[0].name">
+                              </span></strong>
+                           </li>
+                        </ul>
+                        <!-- /ko -->
+                     </li>
+                  </ul>
+               </div>
+         </header>
+         </div>
+      </div>
+
+      <!-- build:js(.) scripts/vendor.js -->
+      <!-- bower:js -->
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/spotify-web-api-js/src/spotify-web-api.js"></script>
+      <script src="bower_components/knockout/dist/knockout.js"></script>
+      <!-- endbower -->
+      <!-- endbuild -->
+      <script>
+         (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+         function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+         e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+         e.src='//www.google-analytics.com/analytics.js';
+         r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+         ga('create','UA-39254352-1');ga('send','pageview');
+      </script>
+      <!-- Startup Framework JS Files -->
+      <script src="scripts/jquery-1.10.2.min.js"></script>
+      <script src="scripts/bootstrap.min.js"></script>
+      <script src="scripts/modernizr.custom.js"></script>
+      <script src="scripts/jquery.parallax.min.js"></script>
+      <script src="scripts/startup-kit.js"></script>
+      <script src="scripts/script.js"></script>
+      <!-- End Startup Framework JS Files -->
+      <!-- build:js({app,.tmp}) scripts/main.js -->
+      <script src="scripts/oauth-config.js"></script>
+      <script src="scripts/oauth-manager.js"></script>
+      <script src="scripts/promise-throttle.js"></script>
+      <script src="scripts/main.js"></script>
+      <!-- endbuild -->
+   </body>
+</html>
