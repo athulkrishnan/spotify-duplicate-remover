@@ -21,4 +21,4 @@ Run it:
 
 ## About the Spotify Web API
 
-This app is an example of how to traverse a user's library without incurring in rate limit. Have a look at the code and see how Promises and a Promise Queue are used to control the amount of requests sent to the Spotify Web API.
+This app is an example of how to traverse a user's library without incurring in rate limit. Have a look at the code and see how Promises and a Promise Queue are used to control the amount of requests sent to the [Spotify Web API](https://developer.spotify.com/web-api/).
